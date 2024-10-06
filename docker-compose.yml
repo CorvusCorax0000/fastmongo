@@ -1,0 +1,18 @@
+services:
+  python-app:
+    build: ./python-app/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo-db
+    environment:
+      - MONGO_URI = mongodb://mongo-db:27017/mydatabase
+
+  mongo-db:
+    image: mongo:latest
+    ports: 
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME = admin
+      - MONGO_INITDB_ROOT_PASSWORD = password
+      - MONGO_INITDB_DATABASE = mydatabase
